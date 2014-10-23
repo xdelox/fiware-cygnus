@@ -47,6 +47,7 @@ public class HttpClientFactory {
     private static Logger logger;
     private static PoolingClientConnectionManager connectionsManager;
     private static PoolingClientConnectionManager sslConnectionsManager;
+    private IdleConnectionsMonitor monitor;
    
     /**
      * Constructor.
@@ -56,18 +57,24 @@ public class HttpClientFactory {
         // create the logger
         logger = Logger.getLogger(HttpClientFactory.class);
         
+        // create a connections manager and a connections monitor
         if (ssl) {
             sslConnectionsManager = new PoolingClientConnectionManager(getSchemeRegistry());
             sslConnectionsManager.setMaxTotal(Constants.MAX_CONNS);
             sslConnectionsManager.setDefaultMaxPerRoute(Constants.MAX_CONNS_PER_ROUTE);
+            monitor = new IdleConnectionsMonitor(sslConnectionsManager, 10, 30);
         } else {
             connectionsManager = new PoolingClientConnectionManager();
             connectionsManager.setMaxTotal(Constants.MAX_CONNS);
             connectionsManager.setDefaultMaxPerRoute(Constants.MAX_CONNS_PER_ROUTE);
+            monitor = new IdleConnectionsMonitor(connectionsManager, 10, 30);
         } // if else
         
         logger.info("Setting max total connections (" + Constants.MAX_CONNS + ")");
         logger.info("Settubg default max connections per route (" + Constants.MAX_CONNS_PER_ROUTE + ")");
+        
+        // start the monitor
+        startMonitor();
     } // HttpClientFactory
     
     /**
@@ -147,5 +154,14 @@ public class HttpClientFactory {
         schemeRegistry.register(httpsScheme);
         return schemeRegistry;
     } // getSchemeRegistry
+    
+    /**
+     * Starts the idle connections monitor. This method is required since Telefonica's checkstyle does not allow for
+     * starting threads from a constructor. Such a style rule has sense becasue a constructor cannot wait for joining
+     * the thread termination; but in this case there is no need for waiting such a termination.
+     */
+    private void startMonitor() {
+        monitor.start();
+    } // startMonitor
     
 } // HttpClientFactory
