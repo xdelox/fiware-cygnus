@@ -146,6 +146,11 @@ public class OrionStats {
                 valuesToMonitor = (ArrayList<HashMap<String, Object>>) md.get("value");
             } // if else if
         } // for
+        
+        LOGGER.debug("Statistics created for attrName=" + attrName + " and attrType=" + attrType + ": "
+                + prevValue + "," + prevTs + "," + numValues + "," + maxValue + "," + minValue + "," + sumValues
+                + "," + sum2Values + "," + maxDiffValues + "," + minDiffValues + "," + maxDiffTs + "," + minDiffTs
+                + "," + clusters.toString() + "," + valuesToMonitor.toString());
     } // OrionStats
     
     /**
@@ -322,6 +327,11 @@ public class OrionStats {
                 } // if
             } // for
         } // if
+        
+        LOGGER.debug("Statistics updated for attrName=" + attrName + " and attrType=" + attrType + ": "
+                + prevValue + "," + prevTs + "," + numValues + "," + maxValue + "," + minValue + "," + sumValues
+                + "," + sum2Values + "," + maxDiffValues + "," + minDiffValues + "," + maxDiffTs + "," + minDiffTs
+                + "," + clusters.toString() + "," + valuesToMonitor.toString());
     } // update
     
     /**
