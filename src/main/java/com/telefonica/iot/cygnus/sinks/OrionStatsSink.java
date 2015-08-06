@@ -160,10 +160,9 @@ public class OrionStatsSink extends OrionSink {
                 
                 String attrName = contextAttribute.getName();
                 String attrType = contextAttribute.getType();
-                
                 String attrMetadata = contextAttribute.getContextMetadata();
                 LOGGER.debug("[" + this.getName() + "] Processing context attribute (name=" + attrName + ", type="
-                        + attrType + ")");
+                        + attrType + ", metadata=" + attrMetadata + ")");
                 
                 // update the statistics
                 OrionStats stats = new OrionStats(attrName, attrType, attrMetadata, enableValueAnalysis,
