@@ -21,7 +21,7 @@
 __author__ = 'Iván Arias León (ivan.ariasleon at telefonica dot com)'
 
 from fabric.api import env, run, get
-from fabric.context_managers import hide, cd
+from fabric.context_managers import hide, cd, lcd
 from fabric.operations import sudo, local, put
 from StringIO import StringIO
 
@@ -92,13 +92,15 @@ class FabricSupport:
         :param path: path where execute the command
         :param sudo_run: with superuser privileges (True | False)
         """
-        with cd(path):
-            if self.LOCALHOST:
+        if self.LOCALHOST:
+            with lcd(path):
                 return local(command)
-            elif sudo_run:
-                return sudo(command)
-            else:
-                return run(command)
+        else:
+            with cd(path):
+                if sudo_run:
+                    return sudo(command)
+                else:
+                    return run(command)
 
     def run(self, command, **kwargs):
         """
