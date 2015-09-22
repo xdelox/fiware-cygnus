@@ -3,3 +3,9 @@ target/
 *.idea
 *.iml
 nbactions.xml
+
+# RPM
+neore/rpm/BUILD/
+neore/rpm/RPMS/
+neore/rpm/SOURCES/
+neore/rpm/SRPMS/
