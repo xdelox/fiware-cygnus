@@ -273,8 +273,6 @@ class Cygnus:
         #  grouping_rules.conf configuration
         if grouping_rules_file_name == DEFAULT:
             myfab.run("cp -R grouping_rules.conf.template grouping_rules.conf")
-        elif grouping_rules_file_name != EMPTY:
-             Grouping_Rules(fab_driver=myfab, file=grouping_rules_file_name, target_path=self.fabric_target_path, sudo=self.fabric_sudo_cygnus)
         else:
             myfab.run("rm -f grouping_rules.conf")
         # change to DEBUG mode in log4j.properties
