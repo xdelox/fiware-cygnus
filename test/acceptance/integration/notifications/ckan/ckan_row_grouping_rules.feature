@@ -34,7 +34,7 @@ Feature: Stored in ckan new notifications per row from context broker using grou
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "false"
     And verify if cygnus is installed correctly
     And verify if ckan is installed correctly
-    And service "match_table", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "random" and attribute type "celcius"
+    And service "match_table", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "random" and attribute type "celsius"
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
     Then receive an "OK" http code
     And changes new destination "<new_destination>" where to verify "<new_dataset>"
@@ -82,7 +82,7 @@ Feature: Stored in ckan new notifications per row from context broker using grou
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "false"
     And verify if cygnus is installed correctly
     And verify if ckan is installed correctly
-    And service "match_table", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "random" and attribute type "celcius"
+    And service "match_table", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "random" and attribute type "celsius"
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
     Then receive an "OK" http code
     And Validate that the attribute value, metadata "true" and type are stored in ckan

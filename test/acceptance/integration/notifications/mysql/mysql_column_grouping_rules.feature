@@ -36,7 +36,7 @@ Feature: Stored in mysql new notifications per column from context broker using 
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "db_pattern", service path "<new_service_path>", entity type "<new_dest_entity_type>", entity id "<new_dest_entity_id>", with attribute number "2", attribute name "pressure" and attribute type "celcius"
+    And service "db_pattern", service path "<new_service_path>", entity type "<new_dest_entity_type>", entity id "<new_dest_entity_id>", with attribute number "2", attribute name "pressure" and attribute type "celsius"
     And create a new database and a table with attribute data type "text" and metadata data type "text"
     And update real values in resource "<resource>" and service path "<service_path>" to notification request
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
@@ -87,7 +87,7 @@ Feature: Stored in mysql new notifications per column from context broker using 
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "db_pattern", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "pressure" and attribute type "celcius"
+    And service "db_pattern", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "pressure" and attribute type "celsius"
     And create a new database and a table with attribute data type "text" and metadata data type "text"
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
     Then Verify that the attribute value is stored in mysql

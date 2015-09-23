@@ -36,7 +36,7 @@ Feature: Stored in ckan new notifications per column from context broker using g
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "false"
     And verify if cygnus is installed correctly
     And verify if ckan is installed correctly
-    And service "org_patterns_01", service path "<new_service_path>", entity type "<new_dest_entity_type>", entity id "<new_dest_entity_id>", with attribute number "1", attribute name "temperature" and attribute type "celcius"
+    And service "org_patterns_01", service path "<new_service_path>", entity type "<new_dest_entity_type>", entity id "<new_dest_entity_id>", with attribute number "1", attribute name "temperature" and attribute type "celsius"
     And create a new organization with a dataset and a new resource with attribute data type "json" and metadata data type "json"
     And update real values in resource "<resource>" and service path "<service_path>" to notification request
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
@@ -87,7 +87,7 @@ Feature: Stored in ckan new notifications per column from context broker using g
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "false"
     And verify if cygnus is installed correctly
     And verify if ckan is installed correctly
-    And service "org_patterns_02", service path "<service_path>", entity type "<new_dest_entity_type>", entity id "<new_dest_entity_id>", with attribute number "1", attribute name "temperature" and attribute type "celcius"
+    And service "org_patterns_02", service path "<service_path>", entity type "<new_dest_entity_type>", entity id "<new_dest_entity_id>", with attribute number "1", attribute name "temperature" and attribute type "celsius"
     And create a new organization with a dataset and a new resource with attribute data type "json" and metadata data type "json"
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
     Then receive an "OK" http code

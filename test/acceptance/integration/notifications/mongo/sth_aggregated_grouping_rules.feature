@@ -37,7 +37,7 @@ Feature: stored in mongo new notifications from context broker but do not apply 
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "false"
     And verify if cygnus is installed correctly
     And verify if mongo is installed correctly
-    And service "test_happy_path", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "1", attribute name "random" and attribute type "celcius"
+    And service "test_happy_path", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "1", attribute name "random" and attribute type "celsius"
     When receives a notification with attributes value "random number=2", metadata value "True" and content "<content>"
     Then receive an "OK" http code
     And validate that the aggregated value is generate by resolution "<resolution>" in mongo

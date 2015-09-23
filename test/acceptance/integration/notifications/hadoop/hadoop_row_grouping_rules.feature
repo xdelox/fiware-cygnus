@@ -37,7 +37,7 @@ Feature: Stored in hadoop new notifications per row from context broker using gr
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "false"
     And verify if cygnus is installed correctly
     And verify if hadoop is installed correctly
-    And service "happy_path_grouping_rules", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "temperature" and attribute type "celcius"
+    And service "happy_path_grouping_rules", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "temperature" and attribute type "celsius"
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
     Then receive an "OK" http code
     And changes new destination "<new_destination>" where to verify "<new_service_path>"
@@ -87,7 +87,7 @@ Feature: Stored in hadoop new notifications per row from context broker using gr
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "false"
     And verify if cygnus is installed correctly
     And verify if hadoop is installed correctly
-    And service "errors_grouping_rules", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "temperature" and attribute type "celcius"
+    And service "errors_grouping_rules", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "temperature" and attribute type "celsius"
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
     Then receive an "OK" http code
     And Validate that the attribute value and type are stored in hadoop

@@ -36,7 +36,7 @@ Feature: Store in mysql new notifications per row from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "happy_path_row_01", service path "/test", entity type "room", entity id "room2", with attribute number "4", attribute name "random" and attribute type "celcius"
+    And service "happy_path_row_01", service path "/test", entity type "room", entity id "room2", with attribute number "4", attribute name "random" and attribute type "celsius"
     When receives a notification with attributes value "random", metadata value "True" and content "<content>"
     Then Validate that the attribute value, metadata "true" and type are stored in mysql
     And Close mysql connection
@@ -52,7 +52,7 @@ Feature: Store in mysql new notifications per row from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "happy_path_row_02", service path "/test", entity type "room", entity id "room2", with attribute number "<attributes_number>", attribute name "random" and attribute type "celcius"
+    And service "happy_path_row_02", service path "/test", entity type "room", entity id "room2", with attribute number "<attributes_number>", attribute name "random" and attribute type "celsius"
     When receives a notification with attributes value "<attribute_value>", metadata value "<metadata_value>" and content "<content>"
     Then Validate that the attribute value, metadata "true" and type are stored in mysql
     And Close mysql connection
@@ -70,7 +70,7 @@ Feature: Store in mysql new notifications per row from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "2", attribute name "random" and attribute type "celcius"
+    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "2", attribute name "random" and attribute type "celsius"
     When receives a notification with attributes value "random", metadata value "True" and content "<content>"
     Then Validate that the attribute value, metadata "true" and type are stored in mysql
     And Close mysql connection
@@ -92,7 +92,7 @@ Feature: Store in mysql new notifications per row from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "<database>", service path "<service_path>", entity type "room", entity id "room2", with attribute number "2", attribute name "random" and attribute type "celcius"
+    And service "<database>", service path "<service_path>", entity type "room", entity id "room2", with attribute number "2", attribute name "random" and attribute type "celsius"
     When receives a notification with attributes value "random", metadata value "True" and content "<content>"
     Then Validate that the attribute value, metadata "true" and type are stored in mysql
     And Close mysql connection
@@ -120,7 +120,7 @@ Feature: Store in mysql new notifications per row from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "resource_test", service path "/testing", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "random" and attribute type "celcius"
+    And service "resource_test", service path "/testing", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "random" and attribute type "celsius"
     When receives a notification with attributes value "random", metadata value "True" and content "<content>"
     Then Validate that the attribute value, metadata "true" and type are stored in mysql
     And Close mysql connection
@@ -148,7 +148,7 @@ Feature: Store in mysql new notifications per row from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "<database>", service path "/testing", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "random" and attribute type "celcius"
+    And service "<database>", service path "/testing", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "random" and attribute type "celsius"
     When receives a notification with attributes value "random", metadata value "True" and content "<content>"
     Then Validate that the attribute value, metadata "true" and type are stored in mysql
     And Close mysql connection
@@ -176,7 +176,7 @@ Feature: Store in mysql new notifications per row from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "attribute_number_test", service path "/testing", entity type "room", entity id "room2", with attribute number "<attribute_number>", attribute name "random" and attribute type "celcius"
+    And service "attribute_number_test", service path "/testing", entity type "room", entity id "room2", with attribute number "<attribute_number>", attribute name "random" and attribute type "celsius"
     When receives a notification with attributes value "random", metadata value "True" and content "<content>"
     Then Validate that the attribute value, metadata "true" and type are stored in mysql
     And Close mysql connection
@@ -200,7 +200,7 @@ Feature: Store in mysql new notifications per row from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "<database>", service path "/testing", entity type "room", entity id "room2", with attribute number "2", attribute name "random" and attribute type "celcius"
+    And service "<database>", service path "/testing", entity type "room", entity id "room2", with attribute number "2", attribute name "random" and attribute type "celsius"
     When receives a notification with attributes value "<attribute_value>", metadata value "True" and content "<content>"
     Then Validate that the attribute value, metadata "true" and type are stored in mysql
     And Close mysql connection

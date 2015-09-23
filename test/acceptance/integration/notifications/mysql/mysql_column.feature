@@ -36,7 +36,7 @@ Feature: Stored in mysql new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "<database>", service path "<service_path>", entity type "room", entity id "room2", with attribute number "<attributes_number>", attribute name "pressure" and attribute type "celcius"
+    And service "<database>", service path "<service_path>", entity type "room", entity id "room2", with attribute number "<attributes_number>", attribute name "pressure" and attribute type "celsius"
     And create a new database and a table with attribute data type "text" and metadata data type "text"
     When receives a notification with attributes value "<attribute_value>", metadata value "<metadata_value>" and content "<content>"
     Then Verify that the attribute value is stored in mysql
@@ -60,7 +60,7 @@ Feature: Stored in mysql new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "2", attribute name "pressure" and attribute type "celcius"
+    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "2", attribute name "pressure" and attribute type "celsius"
     And create a new database and a table with attribute data type "text" and metadata data type "text"
     When receives a notification with attributes value "random", metadata value "True" and content "<content>"
     Then Verify that the attribute value is stored in mysql
@@ -84,7 +84,7 @@ Feature: Stored in mysql new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "multi_service_path", service path "<service_path>", entity type "room", entity id "room2", with attribute number "2", attribute name "pressure" and attribute type "celcius"
+    And service "multi_service_path", service path "<service_path>", entity type "room", entity id "room2", with attribute number "2", attribute name "pressure" and attribute type "celsius"
     And create a new database and a table with attribute data type "text" and metadata data type "text"
     When receives a notification with attributes value "random", metadata value "True" and content "<content>"
     Then Verify that the attribute value is stored in mysql
@@ -114,7 +114,7 @@ Feature: Stored in mysql new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "multi_resource", service path "/test", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "pressure" and attribute type "celcius"
+    And service "multi_resource", service path "/test", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "pressure" and attribute type "celsius"
     And create a new database and a table with attribute data type "text" and metadata data type "text"
     When receives a notification with attributes value "random", metadata value "True" and content "<content>"
     Then Verify that the attribute value is stored in mysql
@@ -144,7 +144,7 @@ Feature: Stored in mysql new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "<attribute_number>", attribute name "pressure" and attribute type "celcius"
+    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "<attribute_number>", attribute name "pressure" and attribute type "celsius"
     And create a new database and a table with attribute data type "text" and metadata data type "text"
     When receives a notification with attributes value "random", metadata value "True" and content "<content>"
     Then Verify that the attribute value is stored in mysql
@@ -166,7 +166,7 @@ Feature: Stored in mysql new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "2", attribute name "pressure" and attribute type "celcius"
+    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "2", attribute name "pressure" and attribute type "celsius"
     And create a new database and a table with attribute data type "<attribute_data_type>" and metadata data type "text"
     When receives a notification with attributes value "<attribute_value>", metadata value "True" and content "<content>"
     Then Verify that the attribute value is stored in mysql
@@ -210,7 +210,7 @@ Feature: Stored in mysql new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "2", attribute name "pressure" and attribute type "celcius"
+    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "2", attribute name "pressure" and attribute type "celsius"
     And create a new database and a table with attribute data type "<attribute_data_type>" and metadata data type "text"
     When receives a notification with attributes value "<attribute_value>", metadata value "True" and content "<content>"
     Then Verify that is not stored in mysql "Error in <attribute_data_type> with value <attribute_data_type>"
@@ -263,7 +263,7 @@ Feature: Stored in mysql new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "without_metadata_field", service path "/test", entity type "room", entity id "room2", with attribute number "2", attribute name "pressure" and attribute type "celcius"
+    And service "without_metadata_field", service path "/test", entity type "room", entity id "room2", with attribute number "2", attribute name "pressure" and attribute type "celsius"
     And create a new database and a table with attribute data type "<attribute_data_type>" and metadata data type "<attribute_metadata_type>"
     When receives a notification with attributes value "random", metadata value "True" and content "<content>"
     Then Verify that is not stored in mysql "<error>"
@@ -284,7 +284,7 @@ Feature: Stored in mysql new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "2", attribute name "pressure" and attribute type "celcius"
+    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "2", attribute name "pressure" and attribute type "celsius"
     And create a new database and a table with attribute data type "text" and metadata data type "text"
     When receives a notification with attributes value "random", metadata value "True" and content "<content>"
     Then Verify that is not stored in mysql "<error>"

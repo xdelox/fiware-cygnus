@@ -43,18 +43,18 @@ Feature: Stored in ckan new notifications per column from context broker
     And Verify that the attribute value is stored in ckan
   Examples:
     | organization   | service_path | attributesQuantity | attribute_name | attribute_type | attribute_value   | metadata_value | content |
-    | cygnus_col_021 | myserv6      | 1                  | pressure       | celcius        | 46.3              | True           | json    |
-    | cygnus_col_021 | myserv6      | 1                  | pressure       | celcius        | 46.3              | True           | xml     |
+    | cygnus_col_021 | myserv6      | 1                  | pressure       | celsius        | 46.3              | True           | json    |
+    | cygnus_col_021 | myserv6      | 1                  | pressure       | celsius        | 46.3              | True           | xml     |
     | cygnus_col_031 | myserv6      | 2                  | my_attribute   | my_Type        | dfgdfgdg          | True           | json    |
     | cygnus_col_031 | myserv6      | 2                  | my_attribute   | my_Type        | dfgdfgdg          | True           | xml     |
     | cygnus_col_041 | myserv6      | 3                  | my_attribute   | my_Type        | {'a':'1','b':'2'} | False          | json    |
     | cygnus_col_041 | myserv6      | 3                  | my_attribute   | my_Type        | {'a':'1','b':'2'} | False          | xml     |
     | cygnus_col_051 | myserv6      | 4                  | my_attribute   | my_Type        | -45.2344          | False          | json    |
     | cygnus_col_051 | myserv6      | 4                  | my_attribute   | my_Type        | -45.2344          | False          | xml     |
-    | cygnus_col_061 | /myserv6     | 5                  | pressure       | celcius        | 549.3             | True           | json    |
-    | cygnus_col_061 | /myserv6     | 5                  | pressure       | celcius        | 549.3             | True           | xml     |
-    | cygnus_col_072 | /            | 5                  | pressure       | celcius        | 549.3             | True           | json    |
-    | cygnus_col_072 | /            | 5                  | pressure       | celcius        | 549.3             | True           | xml     |
+    | cygnus_col_061 | /myserv6     | 5                  | pressure       | celsius        | 549.3             | True           | json    |
+    | cygnus_col_061 | /myserv6     | 5                  | pressure       | celsius        | 549.3             | True           | xml     |
+    | cygnus_col_072 | /            | 5                  | pressure       | celsius        | 549.3             | True           | json    |
+    | cygnus_col_072 | /            | 5                  | pressure       | celsius        | 549.3             | True           | xml     |
 
   @organizations
   Scenario Outline: store in ckan new notifications with different organizations behavior
@@ -63,7 +63,7 @@ Feature: Stored in ckan new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "default", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if ckan is installed correctly
-    And service "<organization>", service path "/myservicepath", entity type "room", entity id "room2", with attribute number "1", attribute name "temperature" and attribute type "celcius"
+    And service "<organization>", service path "/myservicepath", entity type "room", entity id "room2", with attribute number "1", attribute name "temperature" and attribute type "celsius"
     And create a new organization with a dataset and a new resource with attribute data type "json" and metadata data type "json"
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
     Then receive an "OK" http code
@@ -87,7 +87,7 @@ Feature: Stored in ckan new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "default", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if ckan is installed correctly
-    And service "<organization>", service path "<service_path>", entity type "room", entity id "room2", with attribute number "1", attribute name "temperature" and attribute type "celcius"
+    And service "<organization>", service path "<service_path>", entity type "room", entity id "room2", with attribute number "1", attribute name "temperature" and attribute type "celsius"
     And create a new organization with a dataset and a new resource with attribute data type "json" and metadata data type "json"
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
     Then receive an "OK" http code
@@ -117,7 +117,7 @@ Feature: Stored in ckan new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "default", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if ckan is installed correctly
-    And service "resource_multi_0210", service path "/test1", entity type "<entity_type>", entity id "<entity_id>", with attribute number "1", attribute name "temperature" and attribute type "celcius"
+    And service "resource_multi_0210", service path "/test1", entity type "<entity_type>", entity id "<entity_id>", with attribute number "1", attribute name "temperature" and attribute type "celsius"
     And create a new organization with a dataset and a new resource with attribute data type "json" and metadata data type "json"
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
     Then receive an "OK" http code
@@ -147,7 +147,7 @@ Feature: Stored in ckan new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "default", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if ckan is installed correctly
-    And service "resource_multi_0211", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "1", attribute name "temperature" and attribute type "celcius"
+    And service "resource_multi_0211", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "1", attribute name "temperature" and attribute type "celsius"
     And create a new organization with a dataset and a new resource with attribute data type "json" and metadata data type "json"
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
     Then receive an "OK" http code
@@ -177,7 +177,7 @@ Feature: Stored in ckan new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "default", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if ckan is installed correctly
-    And service "<organization>", service path "/test", entity type "room", entity id "room1", with attribute number "<attribute_number>", attribute name "temperature" and attribute type "celcius"
+    And service "<organization>", service path "/test", entity type "room", entity id "room1", with attribute number "<attribute_number>", attribute name "temperature" and attribute type "celsius"
     And create a new organization with a dataset and a new resource with attribute data type "json" and metadata data type "json"
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
     Then receive an "OK" http code
@@ -199,7 +199,7 @@ Feature: Stored in ckan new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "default", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if ckan is installed correctly
-    And service "<organization>", service path "/test", entity type "room", entity id "room1", with attribute number "1", attribute name "temperature" and attribute type "celcius"
+    And service "<organization>", service path "/test", entity type "room", entity id "room1", with attribute number "1", attribute name "temperature" and attribute type "celsius"
     And create a new organization with a dataset and a new resource with attribute data type "<attribute_data_type>" and metadata data type "json"
     When receives a notification with attributes value "<attribute_value>", metadata value "False" and content "<content>"
     Then receive an "OK" http code
@@ -234,7 +234,7 @@ Feature: Stored in ckan new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "default", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if ckan is installed correctly
-    And service "without_fields_031", service path "/test", entity type "room", entity id "room1", with attribute number "1", attribute name "temperature" and attribute type "celcius"
+    And service "without_fields_031", service path "/test", entity type "room", entity id "room1", with attribute number "1", attribute name "temperature" and attribute type "celsius"
     And create a new organization with a dataset and a new resource with attribute data type "<value_field>" and metadata data type "<metadata_field>"
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
     Then receive an "OK" http code
@@ -255,7 +255,7 @@ Feature: Stored in ckan new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "default", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if ckan is installed correctly
-    And service "<organization>", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "temperature" and attribute type "celcius"
+    And service "<organization>", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "temperature" and attribute type "celsius"
     And create a new organization with a dataset and a new resource with attribute data type "<value_field>" and metadata data type "json"
     When receives a notification with attributes value "<attribute_value>", metadata value "False" and content "<content>"
     Then receive an "OK" http code
@@ -296,7 +296,7 @@ Feature: Stored in ckan new notifications per column from context broker
     And copy flume-env.sh, grouping rules file from "default", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if ckan is installed correctly
-    And service "<organization>", service path "/test", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "temperature" and attribute type "celcius"
+    And service "<organization>", service path "/test", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "temperature" and attribute type "celsius"
     And create a new organization with a dataset and a new resource with attribute data type "json" and metadata data type "json"
     When receives a notification with attributes value "random", metadata value "False" and content "<content>"
     Then receive an "OK" http code

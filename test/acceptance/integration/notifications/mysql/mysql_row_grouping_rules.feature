@@ -36,7 +36,7 @@ Feature: Store in mysql new notifications per row from context broker using grou
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "false"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "happy_path_grouping_rules", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "random" and attribute type "celcius"
+    And service "happy_path_grouping_rules", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "random" and attribute type "celsius"
     When receives a notification with attributes value "random", metadata value "True" and content "<content>"
     Then changes new destination "<new_destination>" where to verify "<new_service_path>"
     Then Validate that the attribute value, metadata "true" and type are stored in mysql
@@ -84,7 +84,7 @@ Feature: Store in mysql new notifications per row from context broker using grou
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "false"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "grouping_rules_errors", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "random" and attribute type "celcius"
+    And service "grouping_rules_errors", service path "<service_path>", entity type "<entity_type>", entity id "<entity_id>", with attribute number "2", attribute name "random" and attribute type "celsius"
     When receives a notification with attributes value "random", metadata value "True" and content "<content>"
     Then Validate that the attribute value, metadata "true" and type are stored in mysql
     And check in log, label "lvl=WARN" and text "Invalid grouping rule, some field is empty. It will be discarded."

@@ -36,7 +36,7 @@ Feature: Get aggregated values persisted by Cygnus using different requests
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mongo is installed correctly
-    And service "test_happy_path", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "random" and attribute type "celcius"
+    And service "test_happy_path", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "random" and attribute type "celsius"
     And receives a notification with attributes value "random number=2", metadata value "True" and content "json"
     Then receive an "OK" http code
     And validate that the aggregated value is generate by resolution "month" in mongo
@@ -48,7 +48,7 @@ Feature: Get aggregated values persisted by Cygnus using different requests
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mongo is installed correctly
-    And service "test_resolution", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "random" and attribute type "celcius"
+    And service "test_resolution", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "random" and attribute type "celsius"
     And receives a notification with attributes value "random number=2", metadata value "True" and content "json"
     Then receive an "OK" http code
     And validate that the aggregated value is generate by resolution "<resolution>" in mongo
@@ -67,7 +67,7 @@ Feature: Get aggregated values persisted by Cygnus using different requests
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mongo is installed correctly
-    And service "<service>", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "random" and attribute type "celcius"
+    And service "<service>", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "random" and attribute type "celsius"
     And receives a notification with attributes value "random number=2", metadata value "True" and content "<content>"
     Then receive an "OK" http code
     And validate that the aggregated value is generate by resolution "month" in mongo
@@ -90,7 +90,7 @@ Feature: Get aggregated values persisted by Cygnus using different requests
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mongo is installed correctly
-    And service "test_service_path", service path "<service_path>", entity type "room", entity id "room2", with attribute number "1", attribute name "random" and attribute type "celcius"
+    And service "test_service_path", service path "<service_path>", entity type "room", entity id "room2", with attribute number "1", attribute name "random" and attribute type "celsius"
     And receives a notification with attributes value "random number=2", metadata value "True" and content "<content>"
     Then receive an "OK" http code
     And validate that the aggregated value is generate by resolution "month" in mongo
@@ -118,7 +118,7 @@ Feature: Get aggregated values persisted by Cygnus using different requests
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mongo is installed correctly
-    And service "test_resource", service path "/test", entity type "<entity_type>", entity id "<entity_id>", with attribute number "1", attribute name "random" and attribute type "celcius"
+    And service "test_resource", service path "/test", entity type "<entity_type>", entity id "<entity_id>", with attribute number "1", attribute name "random" and attribute type "celsius"
     And receives a notification with attributes value "random number=2", metadata value "True" and content "<content>"
     Then receive an "OK" http code
     And validate that the aggregated value is generate by resolution "month" in mongo
@@ -144,7 +144,7 @@ Feature: Get aggregated values persisted by Cygnus using different requests
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mongo is installed correctly
-    And service "test_attribute_name", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "<attribute_name>" and attribute type "celcius"
+    And service "test_attribute_name", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "<attribute_name>" and attribute type "celsius"
     And receives a notification with attributes value "random number=2", metadata value "True" and content "<content>"
     Then receive an "OK" http code
     And validate that the aggregated value is generate by resolution "month" in mongo
@@ -163,7 +163,7 @@ Feature: Get aggregated values persisted by Cygnus using different requests
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mongo is installed correctly
-    And service "test_attribute_value", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "random" and attribute type "celcius"
+    And service "test_attribute_value", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "random" and attribute type "celsius"
     And receives a notification with attributes value "<attribute_value>", metadata value "True" and content "<content>"
     Then receive an "OK" http code
     And validate that the aggregated value is generate by resolution "month" in mongo
@@ -197,7 +197,7 @@ Feature: Get aggregated values persisted by Cygnus using different requests
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if mongo is installed correctly
-    And service "test_several_notifications", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "random" and attribute type "celcius"
+    And service "test_several_notifications", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "random" and attribute type "celsius"
     And receives "<notifications>" notifications with consecutive values beginning with "25" and with one step
     Then receive an "OK" http code
     And validate that the aggregated is calculated successfully with resolution "<resolution>"

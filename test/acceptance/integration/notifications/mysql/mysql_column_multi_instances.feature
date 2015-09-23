@@ -36,7 +36,7 @@ Feature: start multi-instances of cygnus using mysql sink and column mode
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "false"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "pressure" and attribute type "celcius"
+    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "pressure" and attribute type "celsius"
     And create a new database and a table with attribute data type "text" and metadata data type "text"
     When receives multiples notifications one by instance and the port defined incremented with attributes value "<attribute_value>", metadata value "<metadata_value>" and content "<content>"
     Then Verify that the attribute value is stored in mysql
@@ -67,7 +67,7 @@ Feature: start multi-instances of cygnus using mysql sink and column mode
     And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "false"
     And verify if cygnus is installed correctly
     And verify if mysql is installed correctly
-    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "pressure" and attribute type "celcius"
+    And service "<database>", service path "/test", entity type "room", entity id "room2", with attribute number "1", attribute name "pressure" and attribute type "celsius"
     And create a new database and a table with attribute data type "text" and metadata data type "text"
     When receives multiples notifications one by instance and the port defined incremented with attributes value "<attribute_value>", metadata value "<metadata_value>" and content "<content>"
     Then check in log, label "lvl=FATAL" and text "Fatal error running the Management Interface. Details=Address already in use"
