@@ -9,3 +9,6 @@ neore/rpm/BUILD/
 neore/rpm/RPMS/
 neore/rpm/SOURCES/
 neore/rpm/SRPMS/
+
+# Test Local
+test-local/
