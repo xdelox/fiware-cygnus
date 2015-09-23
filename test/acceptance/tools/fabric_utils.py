@@ -94,7 +94,7 @@ class FabricSupport:
         """
         if self.LOCALHOST:
             with lcd(path):
-                return local(command)
+                return local(command, True)
         else:
             with cd(path):
                 if sudo_run:
