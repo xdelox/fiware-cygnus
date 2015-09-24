@@ -77,7 +77,7 @@ public class OrionPostgreSQLSink extends OrionSink {
      * Gets the PostgreSQL host. It is protected due to it is only required for testing purposes.
      * @return The postgreSQL host
      */
-    protected String getPostgresHost() {
+    protected String getPostgreSQLHost() {
         return postgresHost;
     } // getPostgresHost
 
@@ -85,7 +85,7 @@ public class OrionPostgreSQLSink extends OrionSink {
      * Gets the PostgreSQL port. It is protected due to it is only required for testing purposes.
      * @return The PostgreSQL port
      */
-    protected String getPostgresPort() {
+    protected String getPostgreSQLPort() {
         return postgresPort;
     } // getPostgresPort
 
@@ -93,7 +93,7 @@ public class OrionPostgreSQLSink extends OrionSink {
      * Gets the PostgreSQL username. It is protected due to it is only required for testing purposes.
      * @return The PostgreSQL username
      */
-    protected String getPostgresUsername() {
+    protected String getPostgreSQLUsername() {
         return postgresUsername;
     } // getPostgresUsername
 
@@ -101,7 +101,7 @@ public class OrionPostgreSQLSink extends OrionSink {
      * Gets the PostgreSQL password. It is protected due to it is only required for testing purposes.
      * @return The PostgreSQL password
      */
-    protected String getPostgresPassword() {
+    protected String getPostgreSQLPassword() {
         return postgresPassword;
     } // getPostgresPassword
 
