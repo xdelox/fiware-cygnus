@@ -1,23 +1,23 @@
 # Copyright 2014 Telefónica Investigación y Desarrollo, S.A.U
-# 
+#
 # This file is part of fiware-cygnus (FI-WARE project).
-# 
+#
 # fiware-cygnus is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
 # Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any
 # later version.
 # fiware-cygnus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
 # warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
 # details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License along with fiware-cygnus. If not, see
 # http://www.gnu.org/licenses/.
-# 
+#
 # For those usages not covered by the GNU Affero General Public License please contact with iot_support at tid dot es
 
 #=============================================
 # To be put in APACHE_FLUME_HOME/conf/agent.conf
 #
-# General configuration template explaining how to setup a sink of each of the available types (HDFS, CKAN, MySQL).
+# General configuration template explaining how to setup a sink of each of the available types (HDFS, CKAN, MySQL, PostgreSQL).
 
 #=============================================
 # The next tree fields set the sources, sinks and channels used by Cygnus. You could use different names than the
@@ -27,13 +27,13 @@
 # sink of the same type and sharing the channel in order to improve the performance (this is like having
 # multi-threading).
 cygnusagent.sources = http-source
-cygnusagent.sinks = hdfs-sink mysql-sink ckan-sink mongo-sink sth-sink kafka-sink
-cygnusagent.channels = hdfs-channel mysql-channel ckan-channel mongo-channel sth-channel kafka-channel
+cygnusagent.sinks = hdfs-sink mysql-sink postgresql-sink ckan-sink mongo-sink sth-sink kafka-sink
+cygnusagent.channels = hdfs-channel mysql-channel postgresql-channel ckan-channel mongo-channel sth-channel kafka-channel
 
 #=============================================
 # source configuration
 # channel name where to write the notification events
-cygnusagent.sources.http-source.channels = hdfs-channel mysql-channel ckan-channel mongo-channel sth-channel kafka-channel
+cygnusagent.sources.http-source.channels = hdfs-channel mysql-channel postgresql-channel ckan-channel mongo-channel sth-channel kafka-channel
 # source class, must not be changed
 cygnusagent.sources.http-source.type = org.apache.flume.source.http.HTTPSource
 # listening port the Flume source will use for receiving incoming notifications
@@ -126,9 +126,26 @@ cygnusagent.sinks.mysql-sink.mysql_port = 3306
 # a valid user in the MySQL server
 cygnusagent.sinks.mysql-sink.mysql_username = root
 # password for the user above
-cygnusagent.sinks.mysql-sink.mysql_password = xxxxxxxxxxxxx 
+cygnusagent.sinks.mysql-sink.mysql_password = xxxxxxxxxxxxx
 # how the attributes are stored, either per row either per column (row, column)
 cygnusagent.sinks.mysql-sink.attr_persistence = column
+
+# ============================================
+# OrionPostgreSQLSink configuration
+# channel name from where to read notification events
+cygnusagent.sinks.postgresql-sink.channel = postgresql-channel
+# sink class, must not be changed
+cygnusagent.sinks.postgresql-sink.type = com.telefonica.iot.cygnus.sinks.OrionpostgresqlSink
+# the FQDN/IP address where the postgresql server runs
+cygnusagent.sinks.postgresql-sink.postgresql_host = x.y.z.w
+# the port where the postgresql server listes for incomming connections
+cygnusagent.sinks.postgresql-sink.postgresql_port = 3306
+# a valid user in the postgresql server
+cygnusagent.sinks.postgresql-sink.postgresql_username = root
+# password for the user above
+cygnusagent.sinks.postgresql-sink.postgresql_password = xxxxxxxxxxxxx
+# how the attributes are stored, either per row either per column (row, column)
+cygnusagent.sinks.postgresql-sink.attr_persistence = column
 
 # ============================================
 # OrionMongoSink configuration
@@ -207,6 +224,15 @@ cygnusagent.channels.mysql-channel.type = memory
 cygnusagent.channels.mysql-channel.capacity = 1000
 # amount of bytes that can be sent per transaction
 cygnusagent.channels.mysql-channel.transactionCapacity = 100
+
+#=============================================
+# postgresql-channel configuration
+# channel type (must not be changed)
+cygnusagent.channels.postgresql-channel.type = memory
+# capacity of the channel
+cygnusagent.channels.postgresql-channel.capacity = 1000
+# amount of bytes that can be sent per transaction
+cygnusagent.channels.postgresql-channel.transactionCapacity = 100
 
 #=============================================
 # mongo-channel configuration

@@ -49,6 +49,18 @@
         "mysql_retries_table_search": 15,
         "mysql_delay_to_retry": 10
     },
+    "postgresql": {
+        "postgresql_version": "X.Y.z",
+        "postgresql_verify_version": "False",
+        "postgresql_host": "w.x.y.z",
+        "postgresql_port": "port",
+        "postgresql_user": "user",
+        "postgresql_pass": "pass",
+        "postgresql_channel_capacity": "1000",
+        "postgresql_channel_transaction_capacity": "100",
+        "postgresql_retries_table_search": 15,
+        "postgresql_delay_to_retry": 10
+    },
     "hadoop": {
         "hadoop_version": "X.Y.z",
         "hadoop_verify_version": "False",

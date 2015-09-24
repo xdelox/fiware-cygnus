@@ -32,6 +32,12 @@ Note: We recommend the use of virtualenv, because is an isolated working copy of
       yum install MySQL-python mysql-devel
     ```
 
+##### Requirements to postgresql
+    ```
+        yum install
+    ```
+
+
 #### Requirements to fabric
     ```
      yum install gcc python-devel
@@ -68,6 +74,13 @@ Some examples:
 - Cygnus-MYSQL per column.
 - Cygnus-MYSQL per column using multi-instances.
 - Cygnus-MYSQL per column using grouping rules.
+
+- Cygnus-PostgreSQL per row.
+- Cygnus-PostgreSQL per row using multi-instances.
+- Cygnus-PostgreSQL per row using grouping rules.
+- Cygnus-PostgreSQL per column.
+- Cygnus-PostgreSQL per column using multi-instances.
+- Cygnus-PostgreSQL per column using grouping rules.
 
 - Cygnus-HADOOP per row.
 - Cygnus-HADOOP per row using Kerberos.
@@ -164,6 +177,18 @@ Verify if a label and its text exists in the last lines. The file log by default
     * mysql_retries_table_search: number of retries for data verification.
     * mysql_delay_to_retry: time to delay in each retry.
 
+- postgresql:
+    * postgresql_version: postgresql version installed.
+    * postgresql_verify_version: determine whether the version is verified or not (True or False).
+    * postgresql_host: IP address or host of postgresql Server.
+    * postgresql_port: port where postgresql is listening.
+    * postgresql_user: user valid in the postgresql server.
+    * postgresql_pass: password to user above.
+    * postgresql_channel_capacity: capacity of the channel
+    * postgresql_channel_transaction_capacity: amount of bytes that can be sent per transaction
+    * postgresql_retries_table_search: number of retries for data verification.
+    * postgresql_delay_to_retry: time to delay in each retry.
+
 -  hadoop:
     * hadoop_version: hadoop version installed.
     * hadoop_verify_version: determine whether the version is verified or not (True or False).
@@ -216,11 +241,8 @@ Verify if a label and its text exists in the last lines. The file log by default
 
 ### tags
 
-You can to use multiples tags in each scenario, possibles tags used:
+You can use multiples tags in each scenario, for example:
 
-    - happy_path, skip, errors_40x, only_develop, ISSUE_XXX, BUG_XXX, multi_instances, grouping_rules, etc
+    happy_path, skip, errors_40x, only_develop, ISSUE_XXX, BUG_XXX, multi_instances, grouping_rules, etc
 
-and to filter scenarios by these tags: see Tests execution section.
-
-
-
+and filter scenarios by these tags: see Tests execution section.

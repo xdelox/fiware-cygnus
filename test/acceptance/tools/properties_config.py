@@ -28,6 +28,7 @@ from lettuce import world
 from tools.cygnus import Cygnus
 from tools.ckan_utils import Ckan
 from tools.mysql_utils import Mysql
+from tools.postgresql_utils import Postgresql
 from tools.hadoop_utils import Hadoop
 from tools.mongo_utils import Mongo
 
@@ -41,15 +42,11 @@ SUDO                  = u'sudo'
 JENKINS               = u'jenkins'
 
 
-
 class Properties:
     """
     copy properties.json file associated to a feature from settings folder to overwrite properties.json
     after storing dictionaries
     """
-
-
-
 
     def __init__(self, **kwargs):
         """
@@ -90,7 +87,7 @@ class Properties:
     def storing_dictionaries(self, sink):
         """
         store dictionaries used by cygnus
-        :param sink: ckan-sink | hdfs-sink | mysql-sink
+        :param sink: ckan-sink | hdfs-sink | mysql-sink | postgresql-sink
         """
         world.cygnus    = Cygnus (protocol=world.config['cygnus']['cygnus_protocol'],
                                   host=world.config['cygnus']['cygnus_host'],
@@ -128,7 +125,7 @@ class Properties:
                                delay_to_retry=world.config['ckan']['ckan_delay_to_retry']
             )
         elif sink == "mysql-sink":
-            world.mysql  = Mysql(host=world.config['mysql']['mysql_host'],
+            world.mysql = Mysql(host=world.config['mysql']['mysql_host'],
                                  port=world.config['mysql']['mysql_port'],
                                  user=world.config['mysql']['mysql_user'],
                                  password=world.config['mysql']['mysql_pass'],
@@ -138,6 +135,18 @@ class Properties:
                                  transaction_capacity=world.config['mysql']['mysql_channel_transaction_capacity'],
                                  retries_number=world.config['mysql']['mysql_retries_table_search'],
                                  delay_to_retry=world.config['mysql']['mysql_delay_to_retry']
+            )
+        elif sink == "postgresql-sink":
+            world.postgresql = Postgresql(host=world.config['postgresql']['postgresql_host'],
+                                      port=world.config['postgresql']['postgresql_port'],
+                                      user=world.config['postgresql']['postgresql_user'],
+                                      password=world.config['postgresql']['postgresql_pass'],
+                                      version=world.config['postgresql']['postgresql_version'],
+                                      postgresql_verify_version=world.config['postgresql']['postgresql_verify_version'],
+                                      capacity=world.config['postgresql']['postgresql_channel_capacity'],
+                                      transaction_capacity=world.config['postgresql']['postgresql_channel_transaction_capacity'],
+                                      retries_number=world.config['postgresql']['postgresql_retries_table_search'],
+                                      delay_to_retry=world.config['postgresql']['postgresql_delay_to_retry']
             )
         elif sink == "hdfs-sink":
             world.hadoop = Hadoop (namenode_url=world.config['hadoop']['hadoop_namenode_url'],
@@ -177,7 +186,3 @@ class Properties:
                                  retries=world.config['sth']['sth_retries_search'],
                                  retry_delay=world.config['sth']['sth_delay_to_retry']
             )
-
-
-
-

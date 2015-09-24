@@ -870,6 +870,13 @@ class Cygnus:
         world.mysql.set_database(self.service)
         world.mysql.disconnect()
 
+    def close_postgresql_connection (self):
+        """
+        close postgresql connection and delete the database used
+        """
+        world.postgresql.set_database(self.service)
+        world.postgresql.disconnect()
+
     def verify_table_search_values_by_column(self):
         """
          Verify that the attribute contents (value) are stored in mysql in column mode
@@ -973,8 +980,3 @@ class Cygnus:
                      "The "+self.attributes[i][NAME]+" metatada value does not match..."
 
     # ------------------------------------------  mongo validations ---------------------------------------------------
-
-
-
-
-
