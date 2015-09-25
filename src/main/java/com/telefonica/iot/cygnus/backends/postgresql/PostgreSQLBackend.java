@@ -98,7 +98,7 @@ public class PostgreSQLBackend {
         } // try catch
 
         try {
-            String query = "CREATE SCHEMA IF NOT EXISTS `" + schemaName + "`";
+            String query = "CREATE SCHEMA IF NOT EXISTS " + schemaName;
             LOGGER.debug("Executing SQL query '" + query + "'");
             stmt.executeUpdate(query);
         } catch (Exception e) {
@@ -109,16 +109,16 @@ public class PostgreSQLBackend {
     } // createDatabaseSchema
 
     /**
-     * Creates a table, given its name, if not exists in the given database.
-     * @param dbName
+     * Creates a table, given its name, if not exists in the given schema.
+     * @param schema
      * @param tableName
      * @throws Exception
      */
-    public void createTable(String dbName, String tableName) throws Exception {
+    public void createTable(String schema, String tableName) throws Exception {
         Statement stmt = null;
 
         // get a connection to the given database
-        Connection con = getConnection(dbName);
+        Connection con = getConnection("");
 
         try {
             stmt = con.createStatement();
@@ -127,8 +127,9 @@ public class PostgreSQLBackend {
         } // try catch
 
         try {
-            String query = "create table if not exists `" + tableName + "` ("
-                           + Constants.RECV_TIME_TS + " long, "
+            String query = "CREATE TABLE IF NOT EXISTS "
+                           + schema + "." + tableName + " ("
+                           + Constants.RECV_TIME_TS + " bigint, "
                            + Constants.RECV_TIME + " text, "
                            + Constants.ENTITY_ID + " text, "
                            + Constants.ENTITY_TYPE + " text, "
@@ -147,7 +148,7 @@ public class PostgreSQLBackend {
 
     /**
      * Inserts a new row in the given table within the given database representing a unique attribute change.
-     * @param dbName
+     * @param schema
      * @param tableName
      * @param recvTimeTs
      * @param recvTime
@@ -159,12 +160,11 @@ public class PostgreSQLBackend {
      * @param attrMd
      * @throws Exception
      */
-    public void insertContextData(String dbName, String tableName, long recvTimeTs, String recvTime, String entityId,
+    public void insertContextData(String schema, String tableName, long recvTimeTs, String recvTime, String entityId,
                                   String entityType, String attrName, String attrType, String attrValue, String attrMd) throws Exception {
         Statement stmt = null;
 
-        // get a connection to the given database
-        Connection con = getConnection(dbName);
+        Connection con = getConnection("");
 
         try {
             stmt = con.createStatement();
@@ -173,7 +173,7 @@ public class PostgreSQLBackend {
         } // try catch
 
         try {
-            String query = "insert into `" + tableName + "` values ('" + recvTimeTs + "', '" + recvTime + "', '"
+            String query = "INSERT INTO " + schema + "." + tableName + " VALUES ('" + recvTimeTs + "', '" + recvTime + "', '"
                            + entityId + "', '" + entityType + "', '" + attrName + "', '" + attrType + "', '" + attrValue
                            + "', '" + attrMd + "')";
             LOGGER.debug("Executing PostgreSQL query '" + query + "'");
@@ -189,21 +189,21 @@ public class PostgreSQLBackend {
 
     /**
      * Inserts a new row in the given table within the given database representing full attribute list changes.
-     * @param dbName
+     * @param schema
      * @param tableName
      * @param recvTime
      * @param attrs
      * @param mds
      * @throws Exception
      */
-    public void insertContextData(String dbName, String tableName, String recvTime,
+    public void insertContextData(String schema, String tableName, String recvTime,
                                   Map<String, String> attrs, Map<String, String> mds) throws Exception {
         Statement stmt = null;
         String columnNames = null;
         String columnValues = null;
 
         // get a connection to the PostgreSQL server and get a statement
-        Connection con = getConnection(dbName);
+        Connection con = getConnection("");
 
         try {
 
@@ -230,7 +230,7 @@ public class PostgreSQLBackend {
 
         try {
             // finish creating the query and execute it
-            String query = "insert into `" + tableName + "` (" + columnNames + ") values (" + columnValues + ")";
+            String query = "insert into " + schema + "." + tableName + " (" + columnNames + ") values (" + columnValues + ")";
             LOGGER.debug("Executing SQL query '" + query + "'");
             stmt.executeUpdate(query);
         } catch (SQLTimeoutException e) {
@@ -247,19 +247,19 @@ public class PostgreSQLBackend {
      * @return
      * @throws Exception
      */
-    private Connection getConnection(String dbName) throws Exception {
+    private Connection getConnection(String schema) throws Exception {
         try {
             // FIXME: the number of cached connections should be limited to a certain number; with such a limit
             //        number, if a new connection is needed, the oldest one is closed
-            Connection con = connections.get(dbName);
+            Connection con = connections.get(schema);
 
             if (con == null || !con.isValid(0)) {
                 if (con != null) {
                     con.close();
                 }
                 con = driver.getConnection(postgresqlHost,
-                                                  postgresqlPort, dbName, postgresqlUsername, postgresqlPassword);
-                connections.put(dbName, con);
+                                           postgresqlPort, schema, postgresqlUsername, postgresqlPassword);
+                connections.put(schema, con);
             } // if
 
             return con;
@@ -305,19 +305,19 @@ public class PostgreSQLBackend {
          * Gets a psql connection.
          * @param host
          * @param port
-         * @param dbName
+         * @param schema
          * @param user
          * @param password
          * @return A psql connection
          * @throws Exception
          */
-        Connection getConnection(String host, String port, String dbName, String user, String password)
+        Connection getConnection(String host, String port, String schema, String user, String password)
         throws Exception {
             // dynamically load the PostgreSQL JDBC driver
             Class.forName(DRIVER_NAME);
 
             // return a connection based on the PostgreSQL JDBC driver
-            String url = "jdbc:postgresql://" + host + ":" + port + "/" + dbName;
+            String url = "jdbc:postgresql://" + host + ":" + port + "/" + schema;
             Properties props = new Properties();
             props.setProperty("user", user);
             props.setProperty("password", password);

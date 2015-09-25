@@ -112,37 +112,6 @@ public class PostgreSQLBackendTest {
     } // testCreateDatabase
 
     /**
-     * Test of createTable method, of class PostgreSQLBackend.
-     */
-    @Test
-    public void testCreateTable() {
-        System.out.println("Testing PostgreSQLBackend.createTable (within first database");
-
-        try {
-            backend.createDatabaseSchema(dbName1);
-            backend.createTable(dbName1, tableName1);
-        } catch (Exception e) {
-            fail(e.getMessage());
-        } finally {
-            assertTrue(backend.getConnections().containsKey(""));
-            assertTrue(backend.getConnections().containsKey(dbName1));
-        } // try catch finally
-
-        System.out.println("Testing PostgreSQLBackend.createTable (within second database");
-
-        try {
-            backend.createDatabaseSchema(dbName2);
-            backend.createTable(dbName2, tableName2);
-        } catch (Exception e) {
-            fail(e.getMessage());
-        } finally {
-            assertTrue(backend.getConnections().containsKey(""));
-            assertTrue(backend.getConnections().containsKey(dbName1));
-            assertTrue(backend.getConnections().containsKey(dbName2));
-        } // try catch finally
-    } // testCreateTable
-
-    /**
      * Test of insertContextData method, of class PostgreSQLBackend.
      */
     @Test
