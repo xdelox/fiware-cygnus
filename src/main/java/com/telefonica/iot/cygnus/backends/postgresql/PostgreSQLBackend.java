@@ -32,6 +32,7 @@ import java.sql.SQLTimeoutException;
 import java.util.HashMap;
 import java.util.Properties;
 
+
 /**
  *
  * @author cristobalcastillo
@@ -39,26 +40,26 @@ import java.util.Properties;
 public class PostgreSQLBackend {
 
     private static final String DRIVER_NAME = "org.postgresql.Driver";
-    private final String postgresHost;
-    private final String postgresPort;
-    private final String postgresUsername;
-    private final String postgresPassword;
+    private final String postgresqlHost;
+    private final String postgresqlPort;
+    private final String postgresqlUsername;
+    private final String postgresqlPassword;
     private final HashMap<String, Connection> connections;
     private PostgreSQLDriver driver;
     private static final CygnusLogger LOGGER = new CygnusLogger(PostgreSQLBackend.class);
 
     /**
      * Constructor.
-     * @param postgresHost
-     * @param postgresPort
-     * @param postgresUsername
-     * @param postgresPassword
+     * @param postgresqlHost
+     * @param postgresqlPort
+     * @param postgresqlUsername
+     * @param postgresqlPassword
      */
-    public PostgreSQLBackend(String postgresHost, String postgresPort, String postgresUsername, String postgresPassword) {
-        this.postgresHost = postgresHost;
-        this.postgresPort = postgresPort;
-        this.postgresUsername = postgresUsername;
-        this.postgresPassword = postgresPassword;
+    public PostgreSQLBackend(String postgresqlHost, String postgresqlPort, String postgresqlUsername, String postgresqlPassword) {
+        this.postgresqlHost = postgresqlHost;
+        this.postgresqlPort = postgresqlPort;
+        this.postgresqlUsername = postgresqlUsername;
+        this.postgresqlPassword = postgresqlPassword;
         connections = new HashMap<String, Connection>();
         driver = new PostgreSQLDriver();
     } // PostgreSQLBackend
@@ -127,14 +128,14 @@ public class PostgreSQLBackend {
 
         try {
             String query = "create table if not exists `" + tableName + "` ("
-                    + Constants.RECV_TIME_TS + " long, "
-                    + Constants.RECV_TIME + " text, "
-                    + Constants.ENTITY_ID + " text, "
-                    + Constants.ENTITY_TYPE + " text, "
-                    + Constants.ATTR_NAME + " text, "
-                    + Constants.ATTR_TYPE + " text, "
-                    + Constants.ATTR_VALUE + " text, "
-                    + Constants.ATTR_MD + " text)";
+                           + Constants.RECV_TIME_TS + " long, "
+                           + Constants.RECV_TIME + " text, "
+                           + Constants.ENTITY_ID + " text, "
+                           + Constants.ENTITY_TYPE + " text, "
+                           + Constants.ATTR_NAME + " text, "
+                           + Constants.ATTR_TYPE + " text, "
+                           + Constants.ATTR_VALUE + " text, "
+                           + Constants.ATTR_MD + " text)";
             LOGGER.debug("Executing SQL query '" + query + "'");
             stmt.executeUpdate(query);
         } catch (Exception e) {
@@ -159,7 +160,7 @@ public class PostgreSQLBackend {
      * @throws Exception
      */
     public void insertContextData(String dbName, String tableName, long recvTimeTs, String recvTime, String entityId,
-            String entityType, String attrName, String attrType, String attrValue, String attrMd) throws Exception {
+                                  String entityType, String attrName, String attrType, String attrValue, String attrMd) throws Exception {
         Statement stmt = null;
 
         // get a connection to the given database
@@ -173,8 +174,8 @@ public class PostgreSQLBackend {
 
         try {
             String query = "insert into `" + tableName + "` values ('" + recvTimeTs + "', '" + recvTime + "', '"
-                    + entityId + "', '" + entityType + "', '" + attrName + "', '" + attrType + "', '" + attrValue
-                    + "', '" + attrMd + "')";
+                           + entityId + "', '" + entityType + "', '" + attrName + "', '" + attrType + "', '" + attrValue
+                           + "', '" + attrMd + "')";
             LOGGER.debug("Executing PostgreSQL query '" + query + "'");
             stmt.executeUpdate(query);
         } catch (SQLTimeoutException e) {
@@ -196,7 +197,7 @@ public class PostgreSQLBackend {
      * @throws Exception
      */
     public void insertContextData(String dbName, String tableName, String recvTime,
-            Map<String, String> attrs, Map<String, String> mds) throws Exception {
+                                  Map<String, String> attrs, Map<String, String> mds) throws Exception {
         Statement stmt = null;
         String columnNames = null;
         String columnValues = null;
@@ -255,9 +256,9 @@ public class PostgreSQLBackend {
             if (con == null || !con.isValid(0)) {
                 if (con != null) {
                     con.close();
-                } // if
-
-                con = driver.getConnection(postgresHost, postgresPort, dbName, postgresUsername, postgresPassword);
+                }
+                con = driver.getConnection(postgresqlHost,
+                                                  postgresqlPort, dbName, postgresqlUsername, postgresqlPassword);
                 connections.put(dbName, con);
             } // if
 
@@ -281,7 +282,7 @@ public class PostgreSQLBackend {
                 con.close();
             } catch (SQLException e) {
                 throw new CygnusRuntimeError("The PostgreSQL connection could not be closed. Details="
-                        + e.getMessage());
+                                             + e.getMessage());
             } // try catch
         } // if
 
@@ -290,7 +291,7 @@ public class PostgreSQLBackend {
                 stmt.close();
             } catch (SQLException e) {
                 throw new CygnusRuntimeError("The PostgreSQL statement could not be closed. Details="
-                        + e.getMessage());
+                                             + e.getMessage());
             } // try catch
         } // if
     } // closePostgreSQLObjects
@@ -300,7 +301,6 @@ public class PostgreSQLBackend {
      * class then it can be mocked.
      */
     protected class PostgreSQLDriver {
-
         /**
          * Gets a psql connection.
          * @param host
@@ -312,17 +312,16 @@ public class PostgreSQLBackend {
          * @throws Exception
          */
         Connection getConnection(String host, String port, String dbName, String user, String password)
-            throws Exception {
+        throws Exception {
             // dynamically load the PostgreSQL JDBC driver
             Class.forName(DRIVER_NAME);
 
             // return a connection based on the PostgreSQL JDBC driver
-
-            String url = "jdbc:postgresql://" + postgresHost + ":" + postgresPort + "/" + dbName;
+            String url = "jdbc:postgresql://" + host + ":" + port + "/" + dbName;
             Properties props = new Properties();
-            props.setProperty("user",postgresUsername);
-            props.setProperty("password",postgresPassword);
-            props.setProperty("ssl","true");
+            props.setProperty("user", user);
+            props.setProperty("password", password);
+            props.setProperty("sslmode", "disable");
 
             LOGGER.debug("Connecting to" + url);
             return DriverManager.getConnection(url, props);

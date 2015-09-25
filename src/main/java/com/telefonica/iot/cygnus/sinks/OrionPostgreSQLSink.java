@@ -59,10 +59,10 @@ import org.apache.flume.Context;
 public class OrionPostgreSQLSink extends OrionSink {
 
     private static final CygnusLogger LOGGER = new CygnusLogger(OrionPostgreSQLSink.class);
-    private String postgresHost;
-    private String postgresPort;
-    private String postgresUsername;
-    private String postgresPassword;
+    private String postgresqlHost;
+    private String postgresqlPort;
+    private String postgresqlUsername;
+    private String postgresqlPassword;
     private boolean rowAttrPersistence;
     private PostgreSQLBackend persistenceBackend;
 
@@ -78,7 +78,7 @@ public class OrionPostgreSQLSink extends OrionSink {
      * @return The postgreSQL host
      */
     protected String getPostgreSQLHost() {
-        return postgresHost;
+        return postgresqlHost;
     } // getPostgresHost
 
     /**
@@ -86,7 +86,7 @@ public class OrionPostgreSQLSink extends OrionSink {
      * @return The PostgreSQL port
      */
     protected String getPostgreSQLPort() {
-        return postgresPort;
+        return postgresqlPort;
     } // getPostgresPort
 
     /**
@@ -94,7 +94,7 @@ public class OrionPostgreSQLSink extends OrionSink {
      * @return The PostgreSQL username
      */
     protected String getPostgreSQLUsername() {
-        return postgresUsername;
+        return postgresqlUsername;
     } // getPostgresUsername
 
     /**
@@ -102,7 +102,7 @@ public class OrionPostgreSQLSink extends OrionSink {
      * @return The PostgreSQL password
      */
     protected String getPostgreSQLPassword() {
-        return postgresPassword;
+        return postgresqlPassword;
     } // getPostgresPassword
 
     /**
@@ -132,15 +132,15 @@ public class OrionPostgreSQLSink extends OrionSink {
 
     @Override
     public void configure(Context context) {
-        postgresHost = context.getString("postgres_host", "localhost");
-        LOGGER.debug("[" + this.getName() + "] Reading configuration (postgres_host=" + postgresHost + ")");
-        postgresPort = context.getString("postgres_port", "5432");
-        LOGGER.debug("[" + this.getName() + "] Reading configuration (postgres_port=" + postgresPort + ")");
-        postgresUsername = context.getString("postgres_username", "opendata");
-        LOGGER.debug("[" + this.getName() + "] Reading configuration (postgres_username=" + postgresUsername + ")");
+        postgresqlHost = context.getString("postgresql_host", "localhost");
+        LOGGER.debug("[" + this.getName() + "] Reading configuration (postgresql_host=" + postgresqlHost + ")");
+        postgresqlPort = context.getString("postgresql_port", "5432");
+        LOGGER.debug("[" + this.getName() + "] Reading configuration (postgresql_port=" + postgresqlPort + ")");
+        postgresqlUsername = context.getString("postgresql_username", "opendata");
+        LOGGER.debug("[" + this.getName() + "] Reading configuration (postgresql_username=" + postgresqlUsername + ")");
         // FIXME: cosmosPassword should be read as a SHA1 and decoded here
-        postgresPassword = context.getString("postgres_password", "unknown");
-        LOGGER.debug("[" + this.getName() + "] Reading configuration (postgres_password=" + postgresPassword + ")");
+        postgresqlPassword = context.getString("postgresql_password", "unknown");
+        LOGGER.debug("[" + this.getName() + "] Reading configuration (postgresql_password=" + postgresqlPassword + ")");
         rowAttrPersistence = context.getString("attr_persistence", "row").equals("row");
         LOGGER.debug("[" + this.getName() + "] Reading configuration (attr_persistence="
                 + (rowAttrPersistence ? "row" : "column") + ")");
@@ -150,7 +150,7 @@ public class OrionPostgreSQLSink extends OrionSink {
     public void start() {
         // create the persistence backend
         LOGGER.debug("[" + this.getName() + "] PostgreSQL persistence backend created");
-        persistenceBackend = new PostgreSQLBackend(postgresHost, postgresPort, postgresUsername, postgresPassword);
+        persistenceBackend = new PostgreSQLBackend(postgresqlHost, postgresqlPort, postgresqlUsername, postgresqlPassword);
         super.start();
         LOGGER.info("[" + this.getName() + "] Startup completed");
     } // start
