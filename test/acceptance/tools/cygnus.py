@@ -46,6 +46,7 @@ ROW_MODE         = u'row'
 COL_MODE         = u'column'
 CKAN_SINK        = u'ckan'
 MYSQL_SINK       = u'mysql'
+POSTGRESQL_SINK  = u'postgresql'
 HDFS_SINK        = u'hdfs'
 MONGO_SINK       = u'mongo'
 STH_SINK         = u'sth'
@@ -249,6 +250,9 @@ class Cygnus:
                 elif sinks_list[i].find(MYSQL_SINK)>=0:
                     ops_list = cygnus_agent.config_mysql_sink(sink=sinks_list[i], channel=self.__get_channels(sinks_list[i]), host=world.config['mysql']['mysql_host'], port=world.config['mysql']['mysql_port'], user=world.config['mysql']['mysql_user'], password=world.config['mysql']['mysql_pass'], persistence=self.persistence)
                     ops_list = cygnus_agent.config_channel (self.__get_channels(sinks_list[i]), capacity=world.config['mysql']['mysql_channel_capacity'], transaction_capacity=world.config['mysql']['mysql_channel_transaction_capacity'])
+                elif sinks_list[i].find(POSTGRESQL_SINK)>=0:
+                    ops_list = cygnus_agent.config_postgresql_sink(sink=sinks_list[i], channel=self.__get_channels(sinks_list[i]), host=world.config['postgresql']['postgresql_host'], port=world.config['postgresql']['postgresql_port'], user=world.config['postgresql']['postgresql_user'], password=world.config['postgresql']['postgresql_pass'], persistence=self.persistence)
+                    ops_list = cygnus_agent.config_channel (self.__get_channels(sinks_list[i]), capacity=world.config['postgresql']['postgresql_channel_capacity'], transaction_capacity=world.config['postgresql']['postgresql_channel_transaction_capacity'])
                 elif sinks_list[i].find(MONGO_SINK)>=0:
                     ops_list = cygnus_agent.config_mongo_sink(sink=sinks_list[i], channel=self.__get_channels(sinks_list[i]), host_port="%s:%s" % (world.config['mongo']['mongo_host'], world.config['mongo']['mongo_port']), user=world.config['mongo']['mongo_user'], password=world.config['mongo']['mongo_password'])
                     ops_list = cygnus_agent.config_channel (self.__get_channels(sinks_list[i]), capacity=world.config['mongo']['mongo_channel_capacity'], transaction_capacity=world.config['mongo']['mongo_channel_transaction_capacity'])

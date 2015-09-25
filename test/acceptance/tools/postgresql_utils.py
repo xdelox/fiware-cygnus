@@ -116,7 +116,6 @@ class Postgresql:
         """
         self.database = database
 
-
     def disconnect (self):
         """
         Close a postgresql connection and drop the database before

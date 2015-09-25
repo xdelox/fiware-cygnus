@@ -302,6 +302,7 @@ class Agent:
         self.__append_command('sed -i "s/.postgresql_username = .*/.postgresql_username = %s/" %s/%s ' % (self.postgresql_user, self.target_path, self.name), self.target_path, self.sudo)
         self.__append_command('sed -i "s/.postgresql_password = .*/.postgresql_password = %s/" %s/%s ' % (self.postgresql_password, self.target_path, self.name), self.target_path, self.sudo)
         self.__append_command('sed -i "s/%s.attr_persistence = .*/%s.attr_persistence = %s/" %s/%s ' % (self.postgresql_sink, self.postgresql_sink, self.postgresql_persistence, self.target_path, self.name), self.target_path, self.sudo)
+
         return OPS_LIST
 
     def config_mongo_sink(self, **kwargs):
