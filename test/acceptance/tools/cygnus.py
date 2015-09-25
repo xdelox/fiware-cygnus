@@ -277,6 +277,8 @@ class Cygnus:
         #  grouping_rules.conf configuration
         if grouping_rules_file_name == DEFAULT:
             myfab.run("cp -R grouping_rules.conf.template grouping_rules.conf")
+        elif grouping_rules_file_name != EMPTY:
+            Grouping_Rules(fab_driver=myfab, file=grouping_rules_file_name, target_path=self.fabric_target_path, sudo=self.fabric_sudo_cygnus)
         else:
             myfab.run("rm -f grouping_rules.conf")
         # change to DEBUG mode in log4j.properties
@@ -558,9 +560,17 @@ class Cygnus:
         retry in get data from mysql
         :return: record in mysql
         """
+        if hasattr(world, "mysql"):
+            sql = world.mysql
+        elif hasattr(world, "postgresql"):
+            sql = world.postgresql
+
+        # TODO
+        # Check that we still have a connection
+
         c = 0
-        for i in range(int(world.mysql.retries_number)):
-            rows=world.mysql.table_search_several_rows(self.attributes_number, database_name, table_name)
+        for i in range(int(sql.retries_number)):
+            rows=sql.table_search_several_rows(self.attributes_number, database_name, table_name)
             if rows != False:
                 if len(rows) == self.attributes_number:
                     for line in rows:
@@ -568,8 +578,8 @@ class Cygnus:
                             if str(line[4]) == str(attributes_name+"_"+str(position)):
                                 return line
             c += 1
-            print " WARN - Retry in get data from mysql. No: ("+ str(c)+")"
-            time.sleep(world.mysql.retry_delay)
+            print " WARN - Retry in get data from sql. No: ("+ str(c)+")"
+            time.sleep(sql.retry_delay)
         return u'ERROR - Attributes are missing....'
 
 

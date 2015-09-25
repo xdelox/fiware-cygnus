@@ -27,8 +27,16 @@ Feature: Store in postgresql new notifications per row from context broker
   Scenario Outline: stored new notifications in postgresql from context broker with or without metadata
     Given copy properties.json file from "epg_properties.json" to test "postgresql-sink" and sudo local "false"
     And configuration of cygnus instances with different ports "true", agents files quantity "1", id "test" and in "row" mode
-    And copy flume-env.sh, grouping rules file from "grouping_rules.conf", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
+    And copy flume-env.sh, grouping rules file from "", log4j.properties, krb5.conf and restart cygnus service. This execution is only once "true"
     And verify if cygnus is installed correctly
     And verify if postgresql is installed correctly
     And service "happy_path_row_01", service path "/test", entity type "room", entity id "room2", with attribute number "4", attribute name "random" and attribute type "celsius"
+    When receives a notification with attributes value "random", metadata value "True" and content "<content>"
+    Then Validate that the attribute value, metadata "true" and type are stored in postgresql
+    And Close postgresql connection
+  Examples:
+    | content |
+    | json    |
+    | xml     |
+
 

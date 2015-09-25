@@ -135,7 +135,7 @@ cygnusagent.sinks.mysql-sink.attr_persistence = column
 # channel name from where to read notification events
 cygnusagent.sinks.postgresql-sink.channel = postgresql-channel
 # sink class, must not be changed
-cygnusagent.sinks.postgresql-sink.type = com.telefonica.iot.cygnus.sinks.OrionpostgresqlSink
+cygnusagent.sinks.postgresql-sink.type = com.telefonica.iot.cygnus.sinks.OrionPostgreSQLSink
 # the FQDN/IP address where the postgresql server runs
 cygnusagent.sinks.postgresql-sink.postgresql_host = x.y.z.w
 # the port where the postgresql server listes for incomming connections

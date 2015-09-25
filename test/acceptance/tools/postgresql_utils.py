@@ -102,7 +102,7 @@ class Postgresql:
 
     def connect(self):
         """
-        Open a new mysql connection
+        Open a new postgresql connection
         """
         try:
             self.database = EMPTY
@@ -134,64 +134,64 @@ class Postgresql:
             assert "PostgreSQL " + self.version in row[0], \
                 "Wrong version expected: `PostgreSQL %s` to be contained in %s"  % (str(self.version),  str(row[0]))
 
-    # def create_database(self, name):
-    #     """
-    #     create a new Database
-    #     :param name:
-    #     """
-    #     self.database = name.lower() # converted to lowercase, because cygnus always convert to lowercase per ckan
-    #     self.__query("%s `%s`;" % (MYSQL_CREATE_DATABASE, self.database))
+    def create_database(self, name):
+        """
+        create a new Database
+        :param name:
+        """
+        self.database = name.lower() # converted to lowercase, because cygnus always convert to lowercase per ckan
+        self.__query("%s `%s`;" % (POSTGRESQL_CREATE_DATABASE, self.database))
 
-    # def generate_field_datastore_to_resource (self, attributes_number, attributes_name, attribute_type, metadata_type, recvtime="timestamp"):
-    #     """
-    #     generate fields to datastore request
-    #     :return: fields list
-    #     """
-    #     field = " (recvTime "+recvtime
-    #     for i in range(int(attributes_number)):
-    #         if attribute_type != WITHOUT: field = field + ", " + attributes_name+"_"+str(i)+" "+ attribute_type
-    #         if metadata_type  != WITHOUT: field = field + ", " + attributes_name+"_"+str(i)+"_md "+ metadata_type
-    #     return  field + ")"
+    def generate_field_datastore_to_resource (self, attributes_number, attributes_name, attribute_type, metadata_type, recvtime="timestamp"):
+        """
+        generate fields to datastore request
+        :return: fields list
+        """
+        field = " (recvTime "+recvtime
+        for i in range(int(attributes_number)):
+            if attribute_type != WITHOUT: field = field + ", " + attributes_name+"_"+str(i)+" "+ attribute_type
+            if metadata_type  != WITHOUT: field = field + ", " + attributes_name+"_"+str(i)+"_md "+ metadata_type
+        return  field + ")"
 
-    # def create_table (self, name, database_name, fields):
-    #     """
-    #     create a new table per column type
-    #     :param name:
-    #     :param database_name:
-    #     :param fields:
-    #     """
-    #     self.table = name
-    #     self.__query("%s `%s`.`%s` %s;" % (MYSQL_CREATE_TABLE,  database_name, self.table, fields))
+    def create_table (self, name, database_name, fields):
+        """
+        create a new table per column type
+        :param name:
+        :param database_name:
+        :param fields:
+        """
+        self.table = name
+        self.__query("%s `%s`.`%s` %s;" % (POSTGRESQL_CREATE_TABLE,  database_name, self.table, fields))
 
-    # def table_exist (self, database_name, table_name):
-    #     """
-    #     determine if table exist in database
-    #     :param database_name:
-    #     :param table_name:
-    #     """
-    #     cur = self.__query('SELECT table_name FROM information_schema.tables WHERE table_schema = "%s" AND table_name = "%s" LIMIT 1;' % (database_name, table_name))
-    #     return  cur.fetchone ()
+    def table_exist (self, database_name, table_name):
+        """
+        determine if table exist in database
+        :param database_name:
+        :param table_name:
+        """
+        cur = self.__query('SELECT table_name FROM information_schema.tables WHERE table_schema = "%s" AND table_name = "%s" LIMIT 1;' % (database_name, table_name))
+        return  cur.fetchone ()
 
-    # def table_search_one_row (self, database_name, table_name):
-    #      """
-    #      get last record from a table
-    #      :param database_name:
-    #      :param table_name:
-    #      """
-    #      if self.table_exist(database_name, table_name) != None:
-    #          cur = self.__query('SELECT * FROM `%s`.`%s` ORDER BY 1 DESC LIMIT 1;' % (database_name, table_name))
-    #          return  cur.fetchone ()   # return one row from the table
-    #      return False
+    def table_search_one_row (self, database_name, table_name):
+         """
+         get last record from a table
+         :param database_name:
+         :param table_name:
+         """
+         if self.table_exist(database_name, table_name) != None:
+             cur = self.__query('SELECT * FROM `%s`.`%s` ORDER BY 1 DESC LIMIT 1;' % (database_name, table_name))
+             return  cur.fetchone ()   # return one row from the table
+         return False
 
-    # def table_search_several_rows (self,rows, database_name, table_name):
-    #      """
-    #      get last records from a table
-    #      :param rows:
-    #      :param database_name:
-    #      :param table_name:
-    #      """
-    #      if self.table_exist(database_name, table_name) != None:
-    #          cur = self.__query('SELECT * FROM `%s`.`%s` ORDER BY 1 DESC LIMIT %s;' % (database_name, table_name, rows))
+    def table_search_several_rows (self,rows, database_name, table_name):
+         """
+         get last records from a table
+         :param rows:
+         :param database_name:
+         :param table_name:
+         """
+         if self.table_exist(database_name, table_name) != None:
+             cur = self.__query('SELECT * FROM `%s`.`%s` ORDER BY 1 DESC LIMIT %s;' % (database_name, table_name, rows))
 
-    #          return  cur.fetchall ()   # return several lines from the table
-    #      return False
+             return  cur.fetchall ()   # return several lines from the table
+         return False
