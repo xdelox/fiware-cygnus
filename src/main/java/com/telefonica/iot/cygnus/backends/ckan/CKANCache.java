@@ -157,7 +157,8 @@ public class CKANCache extends HttpBackend {
         LOGGER.debug("Organization not found in the cache, querying CKAN for it (orgName=" + orgName + ")");
         
         // query CKAN for the organization information
-        String ckanURL = "/api/3/action/organization_show?id=" + orgName;
+        // include_datasets=true since the default value depends on the CKAN version, thus always setup it
+        String ckanURL = "/api/3/action/organization_show?id=" + orgName + "&include_datasets=true";
         ArrayList<Header> headers = new ArrayList<Header>();
         headers.add(new BasicHeader("Authorization", apiKey));
         JsonResponse res = doRequest("GET", ckanURL, true, headers, null);
@@ -239,6 +240,7 @@ public class CKANCache extends HttpBackend {
             JSONArray resources = (JSONArray) result.get("resources");
             LOGGER.debug("Going to populate the resources cache (orgName=" + orgName + ", pkgName=" + pkgName
                     + ")");
+            LOGGER.debug("............" + resources.toJSONString());
             populateResourcesMap(resources, orgName, pkgName, false);
             return true;
         } else if (res.getStatusCode() == 404) {
@@ -296,6 +298,7 @@ public class CKANCache extends HttpBackend {
             } else {
                 LOGGER.debug("Going to populate the resources cache (orgName=" + orgName + ", pkgName=" + pkgName
                         + ")");
+                LOGGER.debug("............" + resources.toJSONString());
                 populateResourcesMap(resources, orgName, pkgName, true);
                 
                 // check if the resource is within the resources cache, once populated
@@ -373,6 +376,10 @@ public class CKANCache extends HttpBackend {
      * @param checkExistence If true, checks if the queried resource already exists in the cache
      */
     private void populateResourcesMap(JSONArray resources, String orgName, String pkgName, boolean checkExistence) {
+        if (resources == null) {
+            LOGGER.debug("................ ARGGGGG ............");
+            return;
+        }
         // this check is for debuging purposes
         if (resources.size() == 0) {
             LOGGER.debug("The resources list is empty, nothing to cache");
